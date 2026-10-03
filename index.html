@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff2db" />
+    <title>Tickle Time! — Little Clock Club</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="playroom" aria-label="Little Clock Club game">
+      <div class="sun-glow" aria-hidden="true"></div>
+      <div class="wall-art art-star" aria-hidden="true">✦</div>
+      <div class="wall-art art-cloud" aria-hidden="true">☁</div>
+      <div class="wall-art art-heart" aria-hidden="true">♥</div>
+      <div class="wall-art art-rainbow" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="room-floor" aria-hidden="true"></div>
+
+      <section class="game-card">
+        <header class="topbar">
+          <a class="brand" href="#home" aria-label="Little Clock Club home">
+            <span class="brand-clock" aria-hidden="true">◷</span>
+            <span>little clock <b>club</b></span>
+          </a>
+          <div class="top-right">
+            <div class="streak" aria-label="Stars earned"><span>⭐</span><b id="stars">0</b></div>
+            <button class="sound-button help-button hidden" id="help-toggle" aria-label="Show clock hints" aria-pressed="false" title="Show clock hints">?</button>
+            <button class="sound-button" id="sound-button" aria-label="Toggle sound" title="Toggle sound">♫</button>
+          </div>
+        </header>
+
+        <section class="screen home-screen" id="home-screen">
+          <div class="home-copy">
+            <div class="tiny-label"><span>✿</span> A LITTLE TIME ADVENTURE <span>✿</span></div>
+            <h1>Ready, set,<br /><span>tick-tock!</span></h1>
+            <p>Let’s make friends with the clock.<br />Pick a game to get started!</p>
+          </div>
+          <div class="home-illustration" aria-hidden="true">
+            <div class="sparkle sparkle-one">✦</div><div class="sparkle sparkle-two">✧</div>
+            <div class="home-clock"><div class="home-eye eye-left"></div><div class="home-eye eye-right"></div><div class="home-smile"></div><div class="home-hand hand-one"></div><div class="home-hand hand-two"></div><div class="home-center"></div><span class="clock-cheek cheek-left"></span><span class="clock-cheek cheek-right"></span></div>
+            <div class="home-book">TIME<br />IS FUN!</div>
+          </div>
+          <div class="mode-list">
+            <button class="mode-button mode-primary" id="start-challenge">
+              <span class="mode-icon">🕰️</span><span class="mode-text"><b>Match the clock!</b><small>Set the hands to the time</small></span><span class="mode-arrow">→</span>
+            </button>
+            <button class="mode-button mode-secondary" id="start-challenge2">
+              <span class="mode-icon">🔢</span><span class="mode-text"><b>Read the clock!</b><small>Fill in the missing digital time</small></span><span class="mode-arrow secondary-arrow">→</span>
+            </button>
+            <button class="mode-button mode-tertiary" id="start-challenge3">
+              <span class="mode-icon">💬</span><span class="mode-text"><b>Say the time!</b><small>Build the time with word cards</small></span><span class="mode-arrow tertiary-arrow">→</span>
+            </button>
+            <button class="mode-button mode-quaternary" id="start-challenge4">
+              <span class="mode-icon">🔠</span><span class="mode-text"><b>Say digital time!</b><small>Turn digital numbers into words</small></span><span class="mode-arrow quaternary-arrow">→</span>
+            </button>
+            <button class="mode-button mode-remix" id="start-remix">
+              <span class="mode-icon">🎲</span><span class="mode-text"><b>Random remix!</b><small>A new kind of clock game each round</small></span><span class="mode-arrow remix-arrow">→</span>
+            </button>
+          </div>
+          <div class="home-footer"><span>✿</span> Made for curious little minds <span>✿</span></div>
+        </section>
+
+        <section class="screen challenge-screen hidden" id="challenge-screen">
+          <div class="challenge-nav">
+            <button class="back-button" id="back-home"><span>←</span> Games</button>
+            <div class="round-pill"><span class="round-dot"></span> ROUND <b id="round-number">01</b></div>
+          </div>
+          <div class="challenge-heading">
+            <div class="tiny-label">✿ CLOCK TIME ✿</div>
+            <h2>Can you make it <span>match?</span></h2>
+            <p>Drag the clock hands to show this time!</p>
+          </div>
+          <div class="target-card">
+            <span class="target-caption">MAKE THIS TIME</span>
+            <div class="digital-time" aria-label="Target time"><span id="target-hour">3</span><i class="colon">:</i><span id="target-minute">00</span></div>
+            <span class="target-sun" aria-hidden="true">☀</span>
+          </div>
+          <div class="clock-wrap">
+            <div class="clock-hint" id="clock-hint"><span>☝</span> Give the hands a little spin!</div>
+            <svg class="clock-face" id="clock-face" viewBox="0 0 320 320" role="img" aria-label="An interactive clock. Drag either hand to set the time.">
+              <defs>
+                <filter id="clockShadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#9c6c83" flood-opacity=".19" /></filter>
+                <linearGradient id="faceGradient" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#fff5e7"/></linearGradient>
+              </defs>
+              <circle cx="160" cy="160" r="145" fill="#ffafbd" filter="url(#clockShadow)" />
+              <g class="clock-legs" aria-hidden="true">
+                <path d="M119 275 Q116 291 111 299" fill="none" stroke="#8561a4" stroke-width="9" stroke-linecap="round"/><path d="M201 275 Q204 291 209 299" fill="none" stroke="#8561a4" stroke-width="9" stroke-linecap="round"/>
+                <ellipse cx="105" cy="301" rx="13" ry="7" fill="#ff8c79"/><ellipse cx="215" cy="301" rx="13" ry="7" fill="#ff8c79"/>
+              </g>
+              <g class="clock-bells" aria-hidden="true">
+                <path d="M94 38 Q95 12 119 13 Q139 15 140 43 Q117 35 94 38Z" fill="#ffd76a" stroke="#fff9e8" stroke-width="5"/>
+                <path d="M180 43 Q181 15 201 13 Q225 12 226 38 Q203 35 180 43Z" fill="#ffd76a" stroke="#fff9e8" stroke-width="5"/>
+                <path d="M104 24 Q115 17 126 26" fill="none" stroke="#fff4bf" stroke-width="5" stroke-linecap="round"/>
+                <path d="M194 26 Q205 17 216 24" fill="none" stroke="#fff4bf" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="117" cy="46" r="7" fill="#ffbd58" stroke="#fff9e8" stroke-width="3"/><circle cx="203" cy="46" r="7" fill="#ffbd58" stroke="#fff9e8" stroke-width="3"/>
+              </g>
+              <circle cx="160" cy="156" r="132" fill="url(#faceGradient)" stroke="#fff" stroke-width="7" />
+              <g id="ticks" stroke="#f3c9aa" stroke-linecap="round"></g>
+              <g id="numbers" fill="#755378" font-family="Fredoka, sans-serif" font-size="22" font-weight="600" text-anchor="middle" dominant-baseline="central"></g>
+              <g id="target-hints" class="target-hints" aria-hidden="true">
+                <line id="hint-minute" x1="160" y1="38" x2="160" y2="57"/>
+                <line id="hint-hour" x1="160" y1="67" x2="160" y2="83"/>
+              </g>
+              <g class="clock-face">
+                <ellipse cx="112" cy="181" rx="17" ry="9" fill="#ffb5bb" opacity=".62"/><ellipse cx="208" cy="181" rx="17" ry="9" fill="#ffb5bb" opacity=".62"/>
+                <ellipse class="googly" cx="126" cy="146" rx="14" ry="18" fill="white" stroke="#715276" stroke-width="2.5"/><ellipse class="googly" cx="194" cy="146" rx="14" ry="18" fill="white" stroke="#715276" stroke-width="2.5"/>
+                <circle class="pupil" id="pupil-left" cx="129" cy="149" r="6.4" fill="#45334f"/><circle class="pupil" id="pupil-right" cx="197" cy="149" r="6.4" fill="#45334f"/>
+                <path d="M145 187 Q160 201 175 187" fill="none" stroke="#8d526a" stroke-width="4" stroke-linecap="round"/>
+              </g>
+              <g id="hour-hand" class="clock-hand hour-hand" tabindex="0" role="slider" aria-label="Hour hand" aria-valuemin="0" aria-valuemax="11"><line x1="160" y1="160" x2="160" y2="111" stroke="#8561a4" stroke-width="13" stroke-linecap="round"/><path class="heart-tip hour-heart" d="M160 94 C164 98 169 103 168 108 C167 114 161 114 160 109 C158 115 152 114 151 108 C151 103 156 98 160 94Z"/></g>
+              <g id="minute-hand" class="clock-hand minute-hand" tabindex="0" role="slider" aria-label="Minute hand" aria-valuemin="0" aria-valuemax="59"><line x1="160" y1="160" x2="160" y2="92" stroke="#ff8a66" stroke-width="8" stroke-linecap="round"/><path class="heart-tip minute-heart" d="M160 74 C164 78 169 83 168 88 C167 94 161 94 160 89 C158 95 152 94 151 88 C151 83 156 78 160 74Z"/></g>
+              <circle cx="160" cy="160" r="11" fill="#ffd05e" stroke="#fff" stroke-width="3"/>
+              <circle cx="160" cy="160" r="4" fill="#aa7347"/>
+            </svg>
+          </div>
+          <div class="check-area"><div class="encourage" id="encourage">You’ve got this, time star! <span>✦</span></div><button class="check-button" id="check-time"><span>Check my clock!</span><span>→</span></button></div>
+        </section>
+
+        <section class="screen read-clock-screen hidden" id="read-clock-screen">
+          <div class="challenge-nav">
+            <button class="back-button" id="back-home-2"><span>←</span> Games</button>
+            <div class="round-pill"><span class="round-dot"></span> ROUND <b id="round-number-2">01</b></div>
+          </div>
+          <div class="challenge-heading">
+            <div class="tiny-label">✿ READ THE TIME ✿</div>
+            <h2>What time is <span>it?</span></h2>
+            <p>Drag a number card into each space.</p>
+          </div>
+          <div class="read-clock-area" id="read-clock-area">
+            <svg class="clock-face read-clock-face" id="read-clock-face" viewBox="0 0 320 320" role="img" aria-label="Analog clock showing a time to read.">
+              <defs><filter id="readClockShadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#9c6c83" flood-opacity=".19"/></filter><linearGradient id="readFaceGradient" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#fff5e7"/></linearGradient></defs>
+              <circle cx="160" cy="160" r="145" fill="#ffafbd" filter="url(#readClockShadow)"/>
+              <g class="clock-legs" aria-hidden="true">
+                <path d="M119 275 Q116 291 111 299" fill="none" stroke="#8561a4" stroke-width="9" stroke-linecap="round"/><path d="M201 275 Q204 291 209 299" fill="none" stroke="#8561a4" stroke-width="9" stroke-linecap="round"/>
+                <ellipse cx="105" cy="301" rx="13" ry="7" fill="#ff8c79"/><ellipse cx="215" cy="301" rx="13" ry="7" fill="#ff8c79"/>
+              </g>
+              <g class="clock-bells" aria-hidden="true">
+                <path d="M94 38 Q95 12 119 13 Q139 15 140 43 Q117 35 94 38Z" fill="#ffd76a" stroke="#fff9e8" stroke-width="5"/>
+                <path d="M180 43 Q181 15 201 13 Q225 12 226 38 Q203 35 180 43Z" fill="#ffd76a" stroke="#fff9e8" stroke-width="5"/>
+                <path d="M104 24 Q115 17 126 26 M194 26 Q205 17 216 24" fill="none" stroke="#fff4bf" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="117" cy="46" r="7" fill="#ffbd58" stroke="#fff9e8" stroke-width="3"/><circle cx="203" cy="46" r="7" fill="#ffbd58" stroke="#fff9e8" stroke-width="3"/>
+              </g>
+              <circle cx="160" cy="160" r="132" fill="url(#readFaceGradient)" stroke="#fff" stroke-width="7"/>
+              <g id="read-ticks" stroke="#f3c9aa" stroke-linecap="round"></g>
+              <g id="read-numbers" fill="#755378" font-family="Fredoka, sans-serif" font-size="22" font-weight="600" text-anchor="middle" dominant-baseline="central"></g>
+              <g class="clock-expression" aria-hidden="true">
+                <ellipse cx="112" cy="181" rx="17" ry="9" fill="#ffb5bb" opacity=".62"/><ellipse cx="208" cy="181" rx="17" ry="9" fill="#ffb5bb" opacity=".62"/>
+                <ellipse cx="126" cy="146" rx="14" ry="18" fill="white" stroke="#715276" stroke-width="2.5"/><ellipse cx="194" cy="146" rx="14" ry="18" fill="white" stroke="#715276" stroke-width="2.5"/>
+                <circle class="pupil" id="read-pupil-left" cx="129" cy="149" r="6.4" fill="#45334f"/><circle class="pupil" id="read-pupil-right" cx="197" cy="149" r="6.4" fill="#45334f"/>
+                <path d="M145 187 Q160 201 175 187" fill="none" stroke="#8d526a" stroke-width="4" stroke-linecap="round"/>
+              </g>
+              <g id="read-hour-hand" class="hour-hand"><line x1="160" y1="160" x2="160" y2="111" stroke="#8561a4" stroke-width="13" stroke-linecap="round"/><path class="heart-tip hour-heart" d="M160 94 C164 98 169 103 168 108 C167 114 161 114 160 109 C158 115 152 114 151 108 C151 103 156 98 160 94Z"/></g>
+              <g id="read-minute-hand" class="minute-hand"><line x1="160" y1="160" x2="160" y2="92" stroke="#ff8a66" stroke-width="8" stroke-linecap="round"/><path class="heart-tip minute-heart" d="M160 74 C164 78 169 83 168 88 C167 94 161 94 160 89 C158 95 152 94 151 88 C151 83 156 78 160 74Z"/></g>
+              <circle cx="160" cy="160" r="11" fill="#ffd05e" stroke="#fff" stroke-width="3"/><circle cx="160" cy="160" r="4" fill="#aa7347"/>
+            </svg>
+          </div>
+          <div class="digital-fill-card">
+            <span class="target-caption">FILL IN THE DIGITAL TIME</span>
+            <div class="digital-fill-time"><button type="button" class="drop-slot" id="hour-slot" data-kind="hour" aria-label="Hour, empty">__</button><i class="colon">:</i><button type="button" class="drop-slot" id="minute-slot" data-kind="minute" aria-label="Minutes, empty">__</button></div>
+          </div>
+          <div class="number-banks" aria-label="Number cards">
+            <div class="number-bank"><h3>HOUR</h3><div class="number-grid" id="hour-cards" aria-label="Hour cards from 01 to 12"></div></div>
+            <div class="number-bank"><h3>MINUTES</h3><div class="number-grid" id="minute-cards" aria-label="Minute cards from 00 to 55"></div></div>
+          </div>
+          <div class="read-check-area"><div class="encourage" id="read-encourage">Find the hour, then the minutes! <span>✦</span></div><button class="check-button" id="check-read-time"><span>Check my time!</span><span>→</span></button></div>
+        </section>
+
+        <section class="screen word-clock-screen hidden" id="word-clock-screen">
+          <div class="challenge-nav">
+            <button class="back-button" id="back-home-3"><span>←</span> Games</button>
+            <div class="round-pill"><span class="round-dot"></span> ROUND <b id="round-number-3">01</b></div>
+          </div>
+          <div class="challenge-heading">
+            <div class="tiny-label">✿ SAY THE TIME ✿</div>
+            <h2 id="word-heading">What time is <span>it?</span></h2>
+            <p id="word-instructions">Use the word cards to read the clock.</p>
+          </div>
+          <div class="word-clock-area" id="word-clock-area">
+            <div class="word-digital-display hidden" id="word-digital-display" aria-label="Digital time">
+              <span id="word-digital-hour">3</span><i class="colon">:</i><span id="word-digital-minute">25</span><span class="digital-sun" aria-hidden="true">☀</span>
+            </div>
+          </div>
+          <div class="word-phrase-card"><span class="target-caption">THE CLOCK SAYS</span><div class="word-phrase" id="word-phrase"></div></div>
+          <div class="word-banks">
+            <div class="word-bank"><h3>MINUTES</h3><div class="word-grid minute-word-grid" id="minute-word-cards"></div></div>
+            <div class="word-bank"><h3>HOURS</h3><div class="word-grid hour-word-grid" id="hour-word-cards"></div></div>
+          </div>
+          <div class="word-check-area"><div class="encourage" id="word-encourage">Say the minutes, then the hour! <span>✦</span></div><button class="check-button" id="check-word-time"><span>Check my words!</span><span>→</span></button></div>
+        </section>
+
+        <section class="screen feedback-screen hidden" id="feedback-screen">
+          <div class="confetti" aria-hidden="true"><i>✦</i><i>✿</i><i>★</i><i>✧</i><i>♥</i><i>✦</i><i>★</i></div>
+          <div class="feedback-badge">⭐</div>
+          <div class="tiny-label">HOORAY, TIME STAR!</div>
+          <h2>You did it<span>!</span></h2>
+          <p class="feedback-time-line">You matched <b id="feedback-time">3:00</b> in</p>
+          <div class="elapsed-card"><span>⏱</span><b id="elapsed-time">0:00</b><small>YOU’RE GETTING SO QUICK!</small></div>
+          <div class="reward-stars" id="reward-stars">⭐ ⭐ ⭐</div>
+          <button class="check-button next-button" id="next-question"><span>Next clock, please!</span><span>→</span></button>
+          <button class="text-button" id="feedback-home">Back to games</button>
+        </section>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

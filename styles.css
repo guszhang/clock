@@ -1,0 +1,366 @@
+:root{font-family:'Fredoka','Trebuchet MS',sans-serif;color:#62496e;font-synthesis:none;text-rendering:optimizeLegibility;--plum:#76558d;--coral:#ff886e;--pink:#ffa9bb;--cream:#fffaf0;--ink:#62496e}*{box-sizing:border-box}html,body{margin:0;min-height:100%;}body{min-height:100dvh;background:#f7c4cf;overflow:hidden}.playroom{position:relative;width:min(100vw,75dvh);height:min(100dvh,133.333vw);min-height:480px;overflow:hidden;margin:auto;background:linear-gradient(157deg,#ffebce 0%,#fff2dc 48%,#fce5dc 100%);isolation:isolate}.sun-glow{position:absolute;width:55%;aspect-ratio:1;top:-22%;right:-8%;border-radius:50%;background:radial-gradient(circle,#fff7cb 0%,#ffe7ad 55%,transparent 70%);z-index:-1}.room-floor{position:absolute;bottom:0;left:0;right:0;height:10%;background:repeating-linear-gradient(90deg,#f4c5aa 0 60px,#edb99b 60px 64px);border-top:7px solid #ffe1bc;z-index:-1;opacity:.75}.wall-art{position:absolute;color:#f4a8b4;opacity:.72;z-index:-1}.art-star{font-size:62px;left:5%;top:22%;transform:rotate(-15deg)}.art-cloud{font-size:70px;right:5%;top:14%;color:#fff9f0;filter:drop-shadow(0 6px 0 #e9bdd1)}.art-heart{font-size:38px;left:8%;top:55%;color:#ffc05c;transform:rotate(-15deg)}.art-rainbow{position:absolute;right:-18px;bottom:9%;width:110px;height:80px;overflow:hidden;z-index:-1}.art-rainbow span{position:absolute;left:0;bottom:-44px;width:110px;height:110px;border:10px solid #ff9aa9;border-radius:50%}.art-rainbow span:nth-child(2){left:12px;bottom:-32px;width:86px;height:86px;border-color:#ffd467}.art-rainbow span:nth-child(3){left:24px;bottom:-20px;width:62px;height:62px;border-color:#91cec3}.game-card{position:absolute;inset:0;display:flex;flex-direction:column;padding:clamp(18px,4.2%,30px) clamp(18px,7%,34px) 20px}.topbar{display:flex;align-items:center;justify-content:space-between;flex:none}.brand{display:flex;align-items:center;gap:7px;text-decoration:none;color:#78628a;font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.2px}.brand b{color:#fa8b80}.brand-clock{display:grid;place-items:center;width:30px;height:30px;border-radius:11px;background:#fffdf6;color:#ff957f;font-size:26px;line-height:1;box-shadow:0 3px 0 #f3cfb7}.top-right{display:flex;align-items:center;gap:9px}.streak,.sound-button{background:#fff9ed;border:0;border-radius:14px;box-shadow:0 3px 0 #f0d4bd;height:34px}.streak{display:flex;align-items:center;gap:5px;padding:0 10px;font-size:13px}.streak span{font-size:14px}.streak b{color:#775984}.sound-button{width:35px;color:#8f6a9c;font-size:17px;cursor:pointer}.screen{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}.hidden{display:none!important}.home-screen{align-items:center;text-align:center;padding-top:clamp(20px,5%,43px)}.tiny-label{font-size:10px;font-weight:600;letter-spacing:1.65px;color:#d68b87}.tiny-label span{color:#eea95b;padding:0 5px}.home-copy h1{font-family:'Baloo 2',sans-serif;font-size:clamp(39px,8.5vw,58px);line-height:.94;letter-spacing:-1.4px;margin:11px 0 9px;color:#735887;font-weight:800}.home-copy h1 span{color:#fa8a7a}.home-copy p{font-size:14px;line-height:1.45;margin:0;color:#917a91}.home-illustration{position:relative;width:190px;height:152px;margin:5px auto 9px}.home-clock{position:absolute;width:124px;height:124px;border-radius:50%;left:22px;top:13px;background:#ffb0bf;border:9px solid #ff9aac;box-shadow:0 8px 0 #ed8da0,0 13px 20px #c783a142;transform:rotate(-7deg)}.home-clock:before,.home-clock:after{content:'';position:absolute;background:#fff5e7;width:5px;height:10px;left:50%;top:4px;border-radius:5px;transform-origin:2px 52px}.home-clock:after{transform:rotate(90deg)}.home-eye{position:absolute;top:38px;width:12px;height:16px;background:#fff;border:1.5px solid #785777;border-radius:50%}.eye-left{left:35px}.eye-right{right:35px}.home-eye:after{content:'';position:absolute;width:5px;height:7px;top:5px;left:5px;background:#45334f;border-radius:50%}.home-smile{position:absolute;left:47px;top:66px;width:15px;height:9px;border-bottom:2.5px solid #8f566e;border-radius:50%}.home-hand{position:absolute;left:57px;top:48px;width:4px;height:30px;border-radius:8px;background:#8561a4;transform-origin:bottom;transform:rotate(-40deg)}.hand-two{height:39px;top:39px;left:57px;width:3px;background:#fff5e7;transform:rotate(32deg)}.home-center{position:absolute;left:52px;top:72px;width:10px;height:10px;border-radius:50%;background:#ffd05e;border:2px solid white}.clock-cheek{position:absolute;top:72px;width:14px;height:7px;border-radius:50%;background:#f8849e}.cheek-left{left:18px}.cheek-right{right:18px}.sparkle{position:absolute;color:#ffb845;font-size:24px}.sparkle-one{right:15px;top:19px}.sparkle-two{left:3px;bottom:9px;color:#91bbb1}.home-book{position:absolute;right:1px;bottom:11px;background:#8cc9b9;color:white;font-family:'Baloo 2';font-weight:800;font-size:11px;line-height:1.05;letter-spacing:.4px;padding:10px 9px;border-radius:7px 11px 11px 7px;transform:rotate(8deg);box-shadow:0 4px #71ab9c;border-left:4px solid #6fa698}.mode-list{width:100%;display:grid;gap:10px}.mode-button{width:100%;display:flex;align-items:center;text-align:left;border:0;border-radius:18px;padding:11px 14px;min-height:63px;font-family:inherit;cursor:pointer;transition:transform .15s,box-shadow .15s}.mode-button:active{transform:translateY(2px)}.mode-primary{background:#fffdf7;box-shadow:0 5px 0 #f0d3bc,0 9px 18px #9b6f7d12}.mode-primary:hover{transform:translateY(-2px);box-shadow:0 7px 0 #f0d3bc,0 12px 20px #9b6f7d16}.mode-icon{width:42px;height:42px;border-radius:14px;background:#fff0d8;display:grid;place-items:center;font-size:23px;margin-right:12px;flex:none}.mode-text{display:flex;flex-direction:column;gap:1px;flex:1}.mode-text b{font-size:16px;color:#755883;font-weight:600}.mode-text small{font-size:11px;color:#a28c9c}.mode-arrow{display:grid;place-items:center;background:#ff9988;color:white;width:28px;height:28px;border-radius:10px;font-size:18px;box-shadow:0 3px #e87d70}.mode-locked{background:#f7ecdf;box-shadow:0 4px 0 #e9d7c4;opacity:.85;cursor:default}.mode-locked .mode-icon{background:#e9e1ed}.mode-locked .mode-text b{color:#988b9b;font-size:14px}.mode-locked .mode-text small{font-size:10px}.soon-pill{font-size:8px;letter-spacing:.7px;color:#a78ca5;background:#fff9ef;padding:5px 7px;border-radius:9px}.home-footer{margin-top:auto;padding:14px 0 2px;color:#af98a3;font-size:10px;letter-spacing:.2px}.home-footer span{color:#efa67e;margin:0 4px}.challenge-screen{align-items:center;padding-top:clamp(10px,2.5%,20px)}.challenge-nav{width:100%;display:flex;justify-content:space-between;align-items:center;flex:none}.back-button{border:0;background:#fff9ef;color:#866a89;border-radius:12px;padding:8px 12px;font:500 12px 'Fredoka';box-shadow:0 3px #eed6c3;cursor:pointer}.back-button span{font-size:16px;vertical-align:-1px;margin-right:4px}.round-pill{font-size:9px;letter-spacing:1px;color:#ad8da0;background:#fff8e9;border-radius:12px;padding:8px 10px}.round-pill b{color:#fa887d;font-size:12px;margin-left:3px}.round-dot{display:inline-block;width:6px;height:6px;background:#94c9af;border-radius:50%;margin-right:4px;vertical-align:1px}.challenge-heading{text-align:center;margin-top:clamp(12px,3.5%,24px)}.challenge-heading h2,.feedback-screen h2{font-family:'Baloo 2';font-size:clamp(23px,5.3vw,31px);line-height:1.05;margin:5px 0 3px;color:#765783}.challenge-heading h2 span{color:#fa8878}.challenge-heading p{font-size:11px;color:#9d859b;margin:0}.target-card{position:relative;text-align:center;background:#fffdf6;border:2px solid #fff;border-radius:18px;padding:7px 31px 9px;margin:12px auto 0;box-shadow:0 5px 0 #f3d8bf,0 9px 18px #9b6f7d10;min-width:142px}.target-caption{display:block;font-size:8px;font-weight:600;letter-spacing:1.3px;color:#bb9aa5}.digital-time{font-family:'Baloo 2';font-size:36px;line-height:.95;font-weight:800;color:#7c598a;font-variant-numeric:tabular-nums;text-shadow:0 2px #f4d9c2}.colon{font-style:normal;display:inline-block;padding:0 2px;animation:blink 1s steps(2,start) infinite}@keyframes blink{to{opacity:.18}}.target-sun{position:absolute;right:10px;top:23px;color:#ffbc52;font-size:17px}.clock-wrap{position:relative;display:flex;flex:1;min-height:0;max-height:390px;width:100%;align-items:center;justify-content:center;flex-direction:column;margin:3px auto 0}.clock-hint{position:absolute;top:4%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fff9ef;border-radius:11px;padding:6px 10px;font-size:10px;color:#a6879d;box-shadow:0 3px #efd9c6;transition:opacity .4s}.clock-hint span{color:#ff947e;margin-right:4px}.clock-hint.quiet{opacity:0}.clock-face{width:min(100%, min(72vw, 34vh));height:auto;max-height:100%;overflow:visible;touch-action:none;user-select:none}.clock-hand{cursor:grab;touch-action:none;outline:none}.clock-hand:active{cursor:grabbing}.hour-hand line{filter:drop-shadow(0 2px 1px #d7c2e2)}.minute-hand line{filter:drop-shadow(0 2px 1px #ffc4a7)}.clock-hand:focus line{stroke-width:14}.minute-hand:focus line{stroke-width:9}.hand-key{display:flex;gap:12px;justify-content:center;color:#a2899c;font-size:9px;padding-top:2px}.hand-key span{white-space:nowrap}.key-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}.key-dot.purple{background:#8561a4}.key-dot.coral{background:#ff8a66}.check-area{width:100%;text-align:center;flex:none;padding-bottom:2px}.encourage{font-size:10px;color:#aa90a1;margin-bottom:7px}.encourage span{color:#ffb844}.check-button{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;border-radius:16px;padding:12px 17px;background:#ff927e;color:white;font:600 16px 'Fredoka';box-shadow:0 5px 0 #e77a70,0 8px 14px #c6767130;cursor:pointer;transition:transform .15s,box-shadow .15s}.check-button span:last-child{font-size:20px}.check-button:hover{transform:translateY(-1px);box-shadow:0 6px 0 #e77a70,0 10px 18px #c6767130}.check-button:active{transform:translateY(3px);box-shadow:0 2px 0 #e77a70}.check-button.shake{animation:shake .32s}@keyframes shake{25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}.feedback-screen{align-items:center;justify-content:center;text-align:center;padding:14px 6px}.confetti{position:absolute;inset:7% 0 auto;height:33%;pointer-events:none}.confetti i{position:absolute;font-style:normal;color:#ffbd57;font-size:22px;animation:float 2s ease-in-out infinite alternate}.confetti i:nth-child(1){left:13%;top:7%;color:#ff8da3}.confetti i:nth-child(2){left:76%;top:12%;color:#83caba;animation-delay:.4s}.confetti i:nth-child(3){left:22%;top:55%;color:#987bb2;animation-delay:.7s}.confetti i:nth-child(4){left:84%;top:57%;color:#ff9a83;animation-delay:.2s}.confetti i:nth-child(5){left:7%;top:34%;color:#f59cb4;animation-delay:.8s}.confetti i:nth-child(6){left:89%;top:32%;animation-delay:.5s}.confetti i:nth-child(7){left:51%;top:0;color:#90cbb7}@keyframes float{to{transform:translateY(-8px) rotate(16deg)}}.feedback-badge{width:78px;height:78px;border-radius:28px;background:#fff6d7;display:grid;place-items:center;font-size:40px;box-shadow:0 6px 0 #f2ddae;margin:0 auto 15px;transform:rotate(-5deg)}.feedback-screen h2{font-size:48px;margin:6px 0 4px}.feedback-screen h2 span{color:#ff907c}.feedback-time-line{font-size:13px;color:#9a8296;margin:4px 0 12px}.feedback-time-line b{color:#79598b}.elapsed-card{width:82%;background:#fffdf6;border-radius:18px;box-shadow:0 4px 0 #f1d9c3;padding:10px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.elapsed-card>span{font-size:20px}.elapsed-card b{font-family:'Baloo 2';font-size:24px;color:#7c598a;font-variant-numeric:tabular-nums}.elapsed-card small{display:block;flex-basis:100%;font-size:8px;letter-spacing:1.1px;color:#b197a6}.reward-stars{font-size:18px;letter-spacing:5px;margin:15px 0 17px}.next-button{margin-top:2px}.text-button{border:0;background:none;color:#9c8298;font:500 11px 'Fredoka';padding:14px;cursor:pointer}.sound-off{opacity:.5}@media(orientation:landscape){.playroom{margin:0 auto}.game-card{padding-top:clamp(12px,3.5vh,25px);padding-bottom:clamp(10px,3vh,18px)}.home-screen{padding-top:clamp(8px,2vh,18px)}.home-copy h1{font-size:clamp(32px,7vh,49px);margin:7px 0}.home-illustration{width:150px;height:122px;margin:0 auto 4px;transform:scale(.82);transform-origin:top center}.mode-list{gap:7px}.mode-button{min-height:52px;padding:8px 11px}.mode-icon{width:34px;height:34px;font-size:18px}.home-footer{padding:8px 0 0}.challenge-heading{margin-top:8px}.challenge-heading h2{font-size:25px}.challenge-heading p{font-size:10px}.target-card{margin-top:8px;padding:5px 27px 7px}.digital-time{font-size:30px}.clock-wrap{max-height:300px}.clock-face{width:min(100%, min(48vw, 37vh));}.clock-hint{top:0}.hand-key{font-size:8px}.check-area{width:94%}.check-button{padding:10px 15px;font-size:14px}.feedback-badge{width:62px;height:62px;font-size:32px;margin-bottom:9px}.feedback-screen h2{font-size:39px}.reward-stars{margin:9px 0 10px}}@media(max-height:560px){body{overflow:auto}.playroom{min-height:480px}.game-card{position:absolute}.home-screen{padding-top:12px}.challenge-screen{padding-top:8px}.clock-wrap{max-height:200px}.clock-face{width:min(100%,190px)}.target-card{margin-top:6px}.challenge-heading{margin-top:8px}}
+
+/* Clock challenge polish */
+.target-card{padding:8px 38px 11px;min-width:172px;border-radius:20px}
+.digital-time{font-size:46px;letter-spacing:1px}
+.clock-wrap{max-height:440px}
+.clock-face{width:min(100%, min(76vw, 41vh));overflow:visible}
+.target-hints line{stroke:#ffc64f;stroke-width:7;stroke-linecap:round;opacity:.78;filter:drop-shadow(0 0 5px #ffe08c);pointer-events:none}
+#hint-hour{stroke:#74c8b2;stroke-width:6;filter:drop-shadow(0 0 5px #a1e1d2)}
+.clock-bells{transform-origin:160px 160px;animation:bell-wiggle 2.7s ease-in-out infinite}
+@keyframes bell-wiggle{0%,86%,100%{transform:rotate(0)}89%{transform:rotate(-4deg)}92%{transform:rotate(4deg)}95%{transform:rotate(-2deg)}}
+.check-area{margin-top:auto;padding-bottom:12px}
+.check-button{max-width:246px;margin:0 auto;padding:9px 16px;font-size:14px;border-radius:14px}
+.check-button span:last-child{font-size:17px}
+.encourage{font-size:12px;margin:0 auto 8px;min-height:1.3em}
+.encourage.incorrect{font-size:clamp(17px,4.3vw,23px);font-weight:600;color:#e16f73;line-height:1.15;max-width:350px;margin-bottom:11px;animation:message-pop .22s ease-out}
+@keyframes message-pop{from{transform:scale(.92);opacity:.5}to{transform:scale(1);opacity:1}}
+.sound-button{transition:transform .15s,opacity .15s}
+.sound-button:active{transform:scale(.92)}
+@media(orientation:landscape){.target-card{padding:5px 32px 8px;min-width:152px}.digital-time{font-size:37px}.clock-wrap{max-height:340px}.clock-face{width:min(100%, min(52vw, 40vh))}.check-area{padding-bottom:5px}.check-button{padding:8px 14px}.encourage{font-size:10px}.encourage.incorrect{font-size:17px}}
+@media(max-height:560px){.clock-wrap{max-height:230px}.clock-face{width:min(100%,210px)}.target-card{padding:3px 25px 6px}.digital-time{font-size:32px}.check-area{padding-bottom:4px}}
+
+/* Larger, lower clock with room for a stronger check button. */
+.challenge-heading{margin-top:clamp(8px,2vh,16px)}
+.target-card{margin-top:clamp(8px,1.5vh,14px);padding:10px 42px 12px;min-width:194px}
+.digital-time{font-size:clamp(48px,7vh,62px);letter-spacing:1px}
+.target-caption{font-size:9px}
+.clock-wrap{max-height:none;justify-content:flex-end;padding-bottom:clamp(4px,1.5vh,14px);margin-top:0}
+.clock-face{width:min(100%,48vh);height:auto;max-height:100%;overflow:visible}
+.check-area{margin-top:0;padding-bottom:clamp(16px,2.5vh,25px)}
+.check-button{width:min(88%,360px);min-height:62px;padding:14px 20px;font-size:19px;border-radius:19px}
+.check-button span:last-child{font-size:24px}
+.encourage{font-size:13px;margin-bottom:10px}
+.target-hints line{opacity:0;transition:opacity .2s ease}
+#clock-face.help-on .target-hints line{opacity:.88}
+.heart-tip{pointer-events:visiblePainted;stroke:#fffaf0;stroke-width:2;stroke-linejoin:round;filter:drop-shadow(0 2px 2px #77578355)}
+.hour-heart{fill:#9a72b2}
+.minute-heart{fill:#ff806f;stroke:#fff4df;stroke-width:2.4}
+.clock-hand:focus .heart-tip{stroke:#ffd36e;stroke-width:3.5}
+.help-button{font-family:'Fredoka',sans-serif;font-weight:700;font-size:17px;line-height:1}
+.clock-wrap{justify-content:flex-start;padding-top:clamp(5px,1vh,10px);padding-bottom:clamp(4px,1vh,10px)}
+.clock-face{transform:translateY(24px)}
+.check-area{transform:translateY(-36px)}
+.pupil{transition:cx .7s ease,cy .7s ease}
+@media(orientation:portrait){
+  body{display:grid;place-items:center}
+  .playroom{margin:0}
+}
+@media(min-width:700px) and (min-height:800px){
+  .mode-text b{font-size:21px}
+  .mode-text small{font-size:14px}
+  .back-button,.text-button{font-size:16px}
+  .check-button{font-size:25px;min-height:70px}
+  .sound-button{font-size:21px}
+  .help-button{font-size:22px}
+}
+@media(orientation:landscape){
+  .challenge-heading{margin-top:6px}
+  .target-card{margin-top:6px;padding:5px 35px 8px;min-width:170px}
+  .digital-time{font-size:clamp(38px,5.8vh,50px)}
+  .clock-wrap{padding-top:4px;padding-bottom:4px}
+  .check-area{transform:translateY(-36px)}
+  .clock-face{width:min(100%,46vh)}
+  .check-area{padding-bottom:clamp(11px,2vh,18px)}
+  .check-button{min-height:54px;font-size:17px}
+}
+@media(max-height:560px){
+  .target-card{padding:3px 28px 5px}
+  .digital-time{font-size:34px}
+  .clock-face{width:min(100%,205px)}
+  .check-area{padding-bottom:8px}
+  .check-button{min-height:46px;font-size:15px}
+}
+
+/* Scale the full interface from the fixed 3:4 game panel, not the device viewport. */
+.playroom{container-type:size}
+.game-card{padding:3cqh 4.5cqw 2cqh}
+.brand{font-size:clamp(11px,2.1cqw,16px)}
+.brand-clock{width:clamp(24px,3.9cqw,30px);height:clamp(24px,3.9cqw,30px);font-size:clamp(20px,3.4cqw,26px)}
+.top-right{gap:clamp(5px,1.2cqw,9px)}
+.streak,.sound-button{height:clamp(29px,4cqh,38px)}
+.streak{font-size:clamp(11px,1.7cqw,14px);padding-inline:clamp(7px,1.3cqw,10px)}
+.sound-button{width:clamp(31px,4.5cqw,40px);font-size:clamp(16px,2.4cqw,21px)}
+.home-screen{padding-top:clamp(12px,4cqh,42px)}
+.home-copy h1{font-size:clamp(34px,5.7cqh,58px)}
+.home-copy p{font-size:clamp(12px,1.7cqh,16px)}
+.home-illustration{width:clamp(150px,24cqw,190px);height:clamp(122px,19cqh,152px);margin-block:clamp(2px,1cqh,10px)}
+.mode-list{gap:clamp(6px,1cqh,10px)}
+.mode-button{min-height:clamp(54px,6.5cqh,68px);padding:clamp(7px,1.1cqh,11px) clamp(10px,1.8cqw,14px);border-radius:clamp(14px,2.3cqw,18px)}
+.mode-icon{width:clamp(36px,5.3cqh,48px);height:clamp(36px,5.3cqh,48px);font-size:clamp(19px,3cqw,24px);margin-right:clamp(8px,1.6cqw,12px)}
+.mode-text b{font-size:clamp(16px,2.7cqw,21px)}
+.mode-text small{font-size:clamp(11px,1.8cqw,14px)}
+.challenge-screen{padding-top:clamp(4px,1.5cqh,16px)}
+.back-button{font-size:clamp(12px,1.9cqw,16px);padding:clamp(5px,.9cqh,9px) clamp(8px,1.5cqw,12px)}
+.round-pill{font-size:clamp(8px,1.2cqw,10px);padding:clamp(5px,.8cqh,8px) clamp(7px,1.3cqw,10px)}
+.challenge-heading{margin-top:clamp(5px,1.2cqh,13px)}
+.challenge-heading h2{font-size:clamp(20px,4.1cqh,31px);margin:clamp(2px,.5cqh,5px) 0}
+.challenge-heading p{font-size:clamp(10px,1.5cqh,13px)}
+.target-card{width:fit-content;margin-top:clamp(5px,1cqh,11px);padding:clamp(5px,1cqh,10px) clamp(20px,5.5cqw,42px) clamp(6px,1.2cqh,12px);min-width:clamp(150px,22cqw,194px)}
+.target-caption{font-size:clamp(8px,1.2cqh,10px)}
+.digital-time{font-size:clamp(38px,6.1cqh,62px)}
+.clock-wrap{max-height:none;min-height:0;justify-content:flex-start;padding:clamp(4px,.8cqh,8px) 0;margin-top:0}
+.clock-face{width:min(100%,43cqh);height:auto;max-height:none;transform:translateY(clamp(12px,2.35cqh,24px))}
+.clock-hint{font-size:clamp(9px,1.35cqh,12px);padding:clamp(4px,.7cqh,7px) clamp(7px,1.3cqw,10px)}
+.check-area{margin-top:0;padding-bottom:clamp(12px,2.5cqh,25px);transform:translateY(calc(clamp(-36px,-3.5cqh,-18px) + 12px))}
+.encourage{font-size:clamp(10px,1.4cqh,14px);white-space:nowrap;margin-bottom:clamp(5px,1cqh,10px)}
+.encourage.incorrect{font-size:clamp(13px,2.5cqw,19px);max-width:100%;white-space:nowrap;letter-spacing:-.25px;margin-bottom:clamp(6px,1.1cqh,11px)}
+.check-button{width:min(88%,360px);min-height:clamp(46px,7cqh,70px);padding:clamp(8px,1.4cqh,14px) clamp(14px,2.6cqw,20px);font-size:clamp(18px,3.3cqw,25px);border-radius:clamp(14px,2.5cqw,19px)}
+.check-button span:last-child{font-size:clamp(20px,3cqw,24px)}
+@media(orientation:portrait){.clock-face{width:min(100%,43cqh)}}
+@container (max-height:600px){
+  .home-illustration{transform:scale(.8);transform-origin:top center;margin-bottom:clamp(-18px,-3cqh,-12px)}
+}
+
+/* Keep the challenge in the same five-row rhythm at every panel size. */
+.challenge-screen{display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;align-items:stretch}
+.challenge-nav,.challenge-heading,.target-card,.clock-wrap,.check-area{width:100%}
+.challenge-heading,.target-card{text-align:center}
+.clock-wrap{align-items:center;justify-content:center}
+.clock-face{flex:none;width:min(100%,43cqh);transform:translateY(clamp(12px,2.35cqh,24px))}
+.check-area{align-self:end}
+
+/* Phone sized 3:4 panels: compact the fixed rows so the clock keeps its space. */
+@container (max-height:680px){
+  .game-card{padding:2cqh 4.5cqw 1.5cqh}
+  .topbar{min-height:clamp(25px,5cqh,30px)}
+  .brand{font-size:clamp(11px,2.4cqw,13px)}
+  .brand-clock{width:clamp(23px,5cqh,27px);height:clamp(23px,5cqh,27px)}
+  .streak,.sound-button{height:clamp(26px,5cqh,29px)}
+  .sound-button{width:clamp(28px,5.5cqw,34px)}
+  .home-screen{padding-top:2cqh}
+  .home-copy h1{font-size:clamp(32px,7cqh,39px);margin:1cqh 0}
+  .home-copy p{font-size:clamp(12px,2.4cqh,14px)}
+  .home-illustration{height:clamp(100px,22cqh,118px);transform:scale(.72);transform-origin:top center;margin:1cqh auto -2cqh}
+  .mode-button{min-height:clamp(49px,10cqh,56px)}
+  .mode-text b{font-size:clamp(15px,3.4cqw,17px)}
+  .mode-text small{font-size:clamp(10px,2.5cqw,12px)}
+  .home-footer{padding:1cqh 0 0;font-size:clamp(9px,2.2cqw,11px)}
+  .challenge-screen{padding-top:0}
+  .challenge-nav .back-button{font-size:clamp(11px,3cqw,13px);padding:clamp(4px,.9cqh,6px) clamp(8px,2cqw,10px)}
+  .round-pill{font-size:clamp(8px,2cqw,9px);padding:clamp(4px,.9cqh,6px) clamp(7px,1.8cqw,9px)}
+  .challenge-heading{margin-top:1cqh}
+  .challenge-heading .tiny-label{font-size:clamp(8px,2cqw,9px)}
+  .challenge-heading h2{font-size:clamp(18px,4.1cqh,22px);margin:.4cqh 0}
+  .challenge-heading p{font-size:clamp(10px,2.3cqh,11px)}
+  .target-card{width:fit-content;margin:1cqh auto 0;padding:1cqh 5cqw 1.2cqh;min-width:clamp(150px,22cqw,194px)}
+  .target-caption{font-size:clamp(8px,1.8cqh,9px)}
+  .digital-time{font-size:clamp(35px,7cqh,42px)}
+  .clock-wrap{padding:.5cqh 0;min-height:0}
+  .clock-face{width:min(100%,43cqh);transform:translateY(clamp(10px,2cqh,13px))}
+  .clock-hint{top:0;font-size:clamp(8px,1.8cqh,9px)}
+  .check-area{transform:translateY(calc(clamp(-12px,-2cqh,-8px) + 12px));padding-bottom:1.5cqh}
+  .encourage{font-size:clamp(10px,2.2cqh,11px);margin-bottom:.8cqh}
+  .encourage.incorrect{font-size:clamp(13px,3.5cqw,15px);margin-bottom:1cqh;white-space:nowrap}
+  .check-button{width:90%;min-height:clamp(44px,9cqh,49px);font-size:clamp(16px,4cqw,18px);padding:1cqh 4cqw}
+  .check-button span:last-child{font-size:clamp(19px,4.4cqw,22px)}
+}
+
+/* Larger tablets scale the same composition up instead of leaving extra space around it. */
+@container (min-height:1150px){
+  .game-card{padding:3cqh 4.5cqw 2cqh}
+  .brand{font-size:2.1cqw}
+  .brand-clock{width:3.9cqw;height:3.9cqw;font-size:3.4cqw}
+  .streak,.sound-button{height:4cqh}
+  .streak{font-size:1.7cqw;padding-inline:1.3cqw}
+  .sound-button{width:4.5cqw;font-size:2.4cqw}
+  .home-screen{padding-top:4cqh}
+  .home-copy h1{font-size:5.7cqh}
+  .home-copy p{font-size:1.7cqh}
+  .home-illustration{width:24cqw;height:19cqh}
+  .mode-button{min-height:6.5cqh;padding:1.1cqh 1.8cqw}
+  .mode-icon{width:5.3cqh;height:5.3cqh;font-size:3cqw;margin-right:1.6cqw}
+  .mode-text b{font-size:2.7cqw}
+  .mode-text small{font-size:1.8cqw}
+  .challenge-screen{padding-top:1.5cqh}
+  .back-button{font-size:1.9cqw;padding:.9cqh 1.5cqw}
+  .round-pill{font-size:1.2cqw;padding:.8cqh 1.3cqw}
+  .challenge-heading{margin-top:1.2cqh}
+  .challenge-heading h2{font-size:4.1cqh;margin:.5cqh 0}
+  .challenge-heading p{font-size:1.5cqh}
+  .target-card{width:fit-content;margin:1cqh auto 0;padding:1cqh 5.5cqw 1.2cqh;min-width:22cqw;max-width:100%}
+  .target-caption{font-size:1.2cqh}
+  .digital-time{font-size:6.1cqh}
+  .clock-wrap{padding:.8cqh 0}
+  .clock-face{width:min(100%,46cqh);transform:translateY(2.35cqh)}
+  .clock-hint{font-size:1.35cqh;padding:.7cqh 1.3cqw}
+  .check-area{padding-bottom:2.5cqh;transform:translateY(calc(-3.5cqh + 12px))}
+  .encourage{font-size:1.4cqh;margin-bottom:1cqh}
+  .encourage.incorrect{font-size:2.5cqw;margin-bottom:1.1cqh}
+  .check-button{width:min(88%,46cqw);min-height:7cqh;padding:1.4cqh 2.6cqw;font-size:3.3cqw;border-radius:2.5cqw}
+  .check-button span:last-child{font-size:3cqw}
+}
+
+/* Challenge 2: read an analog clock and complete its digital display. */
+.mode-secondary{background:#f7fff8;box-shadow:0 5px 0 #cce6d5,0 9px 18px #9b6f7d12}
+.mode-secondary .mode-icon{background:#e4f5e8}
+.secondary-arrow{background:#84c9a7;box-shadow:0 3px #68ae89}
+.read-clock-screen{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto auto;align-items:stretch;gap:clamp(3px,.6cqh,7px);padding-top:clamp(4px,1.5cqh,16px)}
+.read-clock-screen .challenge-heading{margin-top:clamp(3px,.8cqh,9px)}
+.read-clock-screen .challenge-heading h2{font-size:clamp(20px,3.8cqh,30px)}
+.read-clock-area{min-height:0;display:flex;align-items:center;justify-content:center}
+.read-clock-face{width:min(100%,37cqh);height:auto;max-height:100%;overflow:visible;transform:none}
+.digital-fill-card{justify-self:center;text-align:center;background:#fffdf6;border:2px solid white;border-radius:clamp(14px,2.3cqw,20px);box-shadow:0 4px 0 #f1d9c3;padding:clamp(5px,.9cqh,10px) clamp(18px,4cqw,38px);}
+.digital-fill-time{display:flex;align-items:center;justify-content:center;gap:clamp(5px,1cqw,10px);font-family:'Baloo 2',sans-serif;font-size:clamp(32px,5.8cqh,58px);font-weight:800;line-height:1.05;color:#76558d;font-variant-numeric:tabular-nums}
+.digital-fill-time .colon{font-size:.8em}
+.drop-slot{min-width:clamp(52px,8cqw,82px);min-height:clamp(38px,5.5cqh,58px);border:2px dashed #e3b5c5;border-radius:clamp(9px,1.5cqw,14px);background:#fff3ed;color:#d9a6b7;font:inherit;line-height:1;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.drop-slot:hover{transform:translateY(-2px);border-color:#a683b6}
+.drop-slot.filled{background:#f0e8f5;border:2px solid #c9b1d6;color:#75558c}
+#minute-slot.filled{background:#fff0e7;border-color:#f5d0bc;color:#d87e6e}
+.number-banks{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.2cqw,12px);width:100%;min-height:0}
+.number-bank{min-width:0;background:#fff9efc9;border:1px solid #fff;border-radius:clamp(12px,2cqw,17px);padding:clamp(5px,.8cqh,9px);box-shadow:0 3px 0 #efd8c4}
+.number-bank h3{font:600 clamp(8px,1.2cqh,11px) 'Fredoka',sans-serif;letter-spacing:1px;color:#ad8da0;text-align:center;margin:0 0 clamp(3px,.6cqh,6px)}
+.number-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(3px,.6cqw,6px)}
+.number-card{min-width:0;min-height:clamp(26px,3.2cqh,36px);padding:2px 1px;border:1px solid #ead9ea;border-radius:clamp(7px,1.1cqw,10px);background:#f5eef8;color:#75558c;font:600 clamp(11px,1.7cqh,17px) 'Fredoka',sans-serif;box-shadow:0 2px 0 #ddc9e2;cursor:grab;touch-action:none;user-select:none;transition:transform .12s,background .12s,opacity .12s}
+.minute-card{background:#fff0e7;border-color:#f5d0bc;color:#d87e6e;box-shadow:0 2px 0 #efcfbc}
+.number-card:hover,.number-card.chosen{transform:translateY(-2px);background:#e9daf0}
+.minute-card:hover,.minute-card.chosen{background:#ffe1d1}
+.number-card.drag-source{opacity:.35}
+.number-card.drag-ghost{position:fixed;z-index:1000;pointer-events:none;opacity:.96;transform:scale(1.08);cursor:grabbing}
+.read-check-area{text-align:center;padding-bottom:clamp(7px,1.3cqh,14px)}
+.read-check-area .encourage{font-size:clamp(9px,1.2cqh,12px);margin:0 auto clamp(3px,.6cqh,6px)}
+.read-check-area .encourage.incorrect{font-size:clamp(12px,2.2cqw,18px);white-space:nowrap}
+.read-check-area .check-button{min-height:clamp(42px,5.7cqh,58px);font-size:clamp(16px,2.4cqw,21px)}
+@container (max-height:680px){
+  .read-clock-screen{gap:3px;padding-top:0}
+  .read-clock-screen .challenge-heading{margin-top:1cqh}
+  .read-clock-screen .challenge-heading h2{font-size:clamp(18px,3.6cqh,21px);margin:.3cqh 0}
+  .read-clock-screen .challenge-heading p{font-size:clamp(10px,2.1cqh,11px)}
+  .read-clock-face{width:min(100%,32cqh)}
+  .digital-fill-card{padding:.6cqh 4cqw}
+  .digital-fill-time{font-size:clamp(30px,6.4cqh,36px)}
+  .drop-slot{min-width:clamp(47px,12cqw,58px);min-height:clamp(34px,6cqh,40px)}
+  .number-bank{padding:4px}
+  .number-bank h3{font-size:8px;margin-bottom:3px}
+  .number-grid{gap:3px}
+  .number-card{min-height:clamp(24px,5.5cqh,29px);font-size:clamp(10px,2.5cqh,12px);border-radius:7px}
+  .read-check-area{padding-bottom:1cqh}
+  .read-check-area .encourage{font-size:9px}
+  .read-check-area .check-button{min-height:clamp(39px,8cqh,43px);font-size:clamp(15px,3.8cqw,17px);padding:.8cqh 3cqw}
+}
+@container (min-height:1150px){
+  .read-clock-screen{gap:1cqh;padding-top:1.5cqh}
+  .read-clock-screen .challenge-heading{margin-top:1cqh}
+  .read-clock-screen .challenge-heading h2{font-size:3.8cqh}
+  .read-clock-screen .challenge-heading p{font-size:1.5cqh}
+  .read-clock-face{width:min(100%,45cqh)}
+  .digital-fill-card{padding:1cqh 4cqw}
+  .digital-fill-time{font-size:5.8cqh}
+  .drop-slot{min-width:8cqw;min-height:5.5cqh}
+  .number-bank{padding:1cqh}
+  .number-bank h3{font-size:1.2cqh;margin-bottom:.8cqh}
+  .number-grid{gap:.6cqw}
+  .number-card{min-height:3.2cqh;font-size:1.7cqh}
+  .read-check-area{padding-bottom:2cqh}
+  .read-check-area .encourage{font-size:1.2cqh;margin-bottom:.6cqh}
+  .read-check-area .check-button{min-height:5.7cqh;font-size:2.4cqw}
+}
+
+/* Challenge 3: build a spoken clock phrase from hour and minute words. */
+.mode-tertiary{background:#fff9f0;box-shadow:0 5px 0 #efd9bf,0 9px 18px #9b6f7d12}
+.mode-tertiary .mode-icon{background:#fff0dc}
+.tertiary-arrow{background:#f2b658;box-shadow:0 3px #d49a43}
+.word-clock-screen{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto auto;align-items:stretch;gap:clamp(3px,.6cqh,7px);padding-top:clamp(4px,1.5cqh,16px)}
+.word-clock-screen .challenge-heading{margin-top:clamp(3px,.8cqh,9px)}
+.word-clock-screen .challenge-heading h2{font-size:clamp(20px,3.8cqh,30px)}
+.word-clock-area{min-height:0;display:flex;align-items:center;justify-content:center}
+.word-clock-area .read-clock-face{width:min(100%,38cqh);max-height:100%;transform:none}
+.word-phrase-card{justify-self:center;width:fit-content;max-width:100%;text-align:center;background:#fffdf6;border:2px solid white;border-radius:clamp(14px,2.3cqw,20px);box-shadow:0 4px 0 #f1d9c3;padding:clamp(5px,.9cqh,10px) clamp(12px,2.5cqw,24px)}
+.word-phrase{display:flex;align-items:center;justify-content:center;gap:clamp(4px,.8cqw,8px);white-space:nowrap;font:600 clamp(16px,2.8cqh,28px) 'Fredoka',sans-serif;color:#76558d;line-height:1.2}
+.word-slot{min-width:clamp(72px,11cqw,112px);min-height:clamp(34px,4.8cqh,50px);padding:3px 6px;border:2px dashed #c9b1d6;border-radius:clamp(8px,1.4cqw,13px);background:#f0e8f5;color:#75558c;font:600 .83em 'Fredoka',sans-serif;cursor:pointer}
+.word-slot[data-kind="minute"]{border-color:#f5c3ad;background:#fff0e7;color:#d87e6e}
+.word-slot.filled{border-style:solid}
+.word-banks{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.2cqw,12px);width:100%;min-height:0}
+.word-bank{min-width:0;background:#fff9efc9;border:1px solid white;border-radius:clamp(12px,2cqw,17px);padding:clamp(5px,.8cqh,9px);box-shadow:0 3px 0 #efd8c4}
+.word-bank h3{font:600 clamp(8px,1.2cqh,11px) 'Fredoka',sans-serif;letter-spacing:1px;color:#ad8da0;text-align:center;margin:0 0 clamp(3px,.6cqh,6px)}
+.word-grid{display:grid;gap:clamp(3px,.6cqw,6px)}
+.hour-word-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.minute-word-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.word-card{min-width:0;min-height:clamp(25px,3cqh,35px);padding:2px 3px;border:1px solid #ead9ea;border-radius:clamp(7px,1.1cqw,10px);background:#f5eef8;color:#75558c;font:600 clamp(9px,1.45cqh,15px) 'Fredoka',sans-serif;box-shadow:0 2px 0 #ddc9e2;cursor:grab;touch-action:none;user-select:none;white-space:nowrap;transition:transform .12s,background .12s,opacity .12s}
+.minute-word-card{background:#fff0e7;border-color:#f5d0bc;color:#d87e6e;box-shadow:0 2px 0 #efcfbc}
+.word-card:hover,.word-card.chosen{transform:translateY(-2px);background:#e9daf0}
+.minute-word-card:hover,.minute-word-card.chosen{background:#ffe1d1}
+.word-card.drag-source{opacity:.35}
+.word-card.drag-ghost{position:fixed;z-index:1000;pointer-events:none;opacity:.96;transform:scale(1.08);cursor:grabbing}
+.word-check-area{text-align:center;padding-bottom:clamp(7px,1.3cqh,14px)}
+.word-check-area .encourage{font-size:clamp(9px,1.2cqh,12px);margin:0 auto clamp(3px,.6cqh,6px)}
+.word-check-area .encourage.incorrect{font-size:clamp(12px,2.2cqw,18px);white-space:nowrap}
+.word-check-area .check-button{min-height:clamp(42px,5.7cqh,58px);font-size:clamp(16px,2.4cqw,21px)}
+@container (max-height:680px){
+  .mode-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .mode-button{min-height:56px;padding:5px 6px;border-radius:12px}
+  .mode-icon{width:27px;height:27px;margin-right:5px;font-size:15px;border-radius:9px}
+  .mode-text{min-width:0}
+  .mode-text b{font-size:clamp(11px,3.2cqw,13px);line-height:1.05}
+  .mode-text small{font-size:clamp(8px,2.2cqw,9px);line-height:1.05}
+  .mode-arrow{width:20px;height:20px;min-width:20px;font-size:14px;margin-left:3px}
+  .word-clock-screen{gap:3px;padding-top:0}
+  .word-clock-screen .challenge-heading{margin-top:1cqh}
+  .word-clock-screen .challenge-heading h2{font-size:clamp(18px,3.6cqh,21px);margin:.3cqh 0}
+  .word-clock-screen .challenge-heading p{font-size:clamp(10px,2.1cqh,11px)}
+  .word-clock-area .read-clock-face{width:min(100%,34cqh)}
+  .word-phrase-card{padding:.6cqh 3cqw}
+  .word-phrase{font-size:clamp(14px,3cqh,17px);gap:3px}
+  .word-slot{min-width:clamp(60px,18cqw,75px);min-height:clamp(30px,5.8cqh,36px);padding:2px 4px}
+  .word-bank{padding:4px}
+  .word-bank h3{font-size:8px;margin-bottom:3px}
+  .word-grid{gap:3px}
+  .word-card{min-height:clamp(23px,4.8cqh,26px);font-size:clamp(9px,2.2cqh,10px);border-radius:6px;padding-inline:1px}
+  .word-check-area{padding-bottom:1cqh}
+  .word-check-area .encourage{font-size:9px}
+  .word-check-area .check-button{min-height:clamp(39px,8cqh,43px);font-size:clamp(15px,3.8cqw,17px);padding:.8cqh 3cqw}
+}
+@container (min-height:1150px){
+  .word-clock-screen{gap:1cqh;padding-top:1.5cqh}
+  .word-clock-screen .challenge-heading{margin-top:1cqh}
+  .word-clock-screen .challenge-heading h2{font-size:3.8cqh}
+  .word-clock-screen .challenge-heading p{font-size:1.5cqh}
+  .word-clock-area .read-clock-face{width:min(100%,45cqh)}
+  .word-phrase-card{padding:1cqh 2.5cqw}
+  .word-phrase{font-size:2.8cqh;gap:.8cqw}
+  .word-slot{min-width:11cqw;min-height:4.8cqh}
+  .word-bank{padding:1cqh}
+  .word-bank h3{font-size:1.2cqh;margin-bottom:.8cqh}
+  .word-grid{gap:.6cqw}
+  .word-card{min-height:3cqh;font-size:1.45cqh;padding:2px .5cqw}
+  .word-check-area{padding-bottom:2cqh}
+  .word-check-area .encourage{font-size:1.2cqh;margin-bottom:.6cqh}
+  .word-check-area .check-button{min-height:5.7cqh;font-size:2.4cqw}
+}
+
+/* Fourth mode uses the word exercise with a digital time display. */
+.mode-quaternary{background:#fff9f0;box-shadow:0 5px 0 #efd9bf,0 9px 18px #9b6f7d12}
+.mode-quaternary .mode-icon{background:#fff0dc}
+.quaternary-arrow{background:#79b9e8;box-shadow:0 3px #5797c5}
+.word-digital-display{position:relative;align-items:center;justify-content:center;gap:clamp(3px,.7cqw,8px);width:fit-content;max-width:100%;padding:clamp(8px,1.7cqh,18px) clamp(28px,6cqw,58px);border:3px solid white;border-radius:clamp(18px,3.2cqw,28px);background:#fffdf6;box-shadow:0 7px 0 #f1d9c3,0 12px 22px #9b6f7d12;font:800 clamp(54px,8cqh,80px) 'Baloo 2',sans-serif;line-height:1;color:#76558d;font-variant-numeric:tabular-nums;text-shadow:0 2px #f4d9c2}
+.word-digital-display .colon{font-style:normal}
+.word-digital-display .digital-sun{position:absolute;right:clamp(7px,1.4cqw,13px);top:clamp(6px,1cqh,11px);font-size:.24em;color:#ffbc52;text-shadow:none}
+.word-clock-area.digital-mode .word-digital-display{display:flex}
+.word-clock-area.digital-mode .read-clock-face{display:none}
+@container (max-height:680px){
+  .word-digital-display{font-size:clamp(42px,10cqh,52px);padding:1.2cqh 7cqw;border-radius:18px}
+  .word-digital-display .digital-sun{right:2cqw;top:.8cqh}
+}
+@container (min-height:1150px){
+  .word-digital-display{font-size:10cqh;padding:1.7cqh 6cqw;border-radius:3.2cqw}
+}
+
+/* Give each landing mode its own gentle color family. */
+.mode-primary{background:#fff0ed;box-shadow:0 5px 0 #efc9c0,0 9px 18px #9b6f7d12}
+.mode-primary .mode-icon{background:#ffe0dc}
+.mode-secondary{background:#eef9f0;box-shadow:0 5px 0 #c9e5d1,0 9px 18px #9b6f7d12}
+.mode-secondary .mode-icon{background:#def0e1}
+.mode-tertiary{background:#fff1e7;box-shadow:0 5px 0 #f0d0b8,0 9px 18px #9b6f7d12}
+.mode-tertiary .mode-icon{background:#ffe2ce}
+.tertiary-arrow{background:#e9aa52;box-shadow:0 3px #c48737}
+.mode-quaternary{background:#edf7ff;box-shadow:0 5px 0 #c9dfef,0 9px 18px #9b6f7d12}
+.mode-quaternary .mode-icon{background:#dceefb}
+.mode-remix{background:#f3edfb;box-shadow:0 5px 0 #d8cae9,0 9px 18px #9b6f7d12}
+.mode-remix .mode-icon{background:#e6daf5}
+.remix-arrow{background:#9a78c5;box-shadow:0 3px #755696}
+@container (max-height:680px){
+  .mode-list>.mode-button:last-child{grid-column:1/-1;min-height:44px}
+  .mode-list>.mode-button:last-child .mode-icon{width:24px;height:24px;font-size:14px}
+  .mode-list>.mode-button:last-child .mode-text b{font-size:clamp(12px,3cqw,14px)}
+  .mode-list>.mode-button:last-child .mode-text small{font-size:clamp(8px,2cqw,9px)}
+}
