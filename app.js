@@ -8,6 +8,9 @@
   let target = { hour: 3, minute: 0 };
   let shown = { hour: 0, minute: 0 };
   let startedAt = 0;
+  let mistakes = 0;
+  // Seconds a 5-7 year old can reasonably take for a speedy round, per game.
+  const parSeconds = { 1: 45, 2: 30, 3: 40, 4: 35 };
   let round = 0;
   let stars = 0;
   let dragging = null;
@@ -24,6 +27,7 @@
   let audioContext = null;
   let musicTimer = null;
   let musicStep = 0;
+  let musicKind = 'game';
   let lastTickAt = 0;
 
   for (let i = 0; i < 60; i++) {
@@ -115,6 +119,85 @@
 
   function show(name) {
     Object.entries(screens).forEach(([key, el]) => el.classList.toggle('hidden', key !== name));
+    cancelFingerHint();
+    document.querySelectorAll('.home-only').forEach((el) => el.classList.toggle('hidden', name !== 'home'));
+    if (name === 'home') { stopMusic(); if (audioContext && audioContext.state === 'running') startMusic('home'); }
+    if (round === 1 && name !== 'home' && name !== 'feedback') hintTimer = window.setTimeout(playFingerHint, 2500);
+  }
+
+  // First-round teaching hint: a fingertip fades in and shows what to drag, until the player touches anything.
+  const playroom = document.querySelector('.playroom');
+  const finger = document.createElement('div');
+  finger.className = 'finger-hint';
+  finger.setAttribute('aria-hidden', 'true');
+  finger.innerHTML = '<svg viewBox="0 0 64 72"><path d="M21 8c0-4 3-6 6-6s6 2 6 6v24l3-1c3-1 6 1 6 4l1-1c3-1 6 1 6 4l1-1c3-1 6 1 6 4v12c0 9-7 17-16 17H31c-6 0-10-3-13-8L8 40c-2-3 0-6 3-6 2 0 4 1 6 3l4 5z" fill="#ffe0c8" stroke="#fff" stroke-width="7" stroke-linejoin="round"/><path d="M21 8c0-4 3-6 6-6s6 2 6 6v24l3-1c3-1 6 1 6 4l1-1c3-1 6 1 6 4l1-1c3-1 6 1 6 4v12c0 9-7 17-16 17H31c-6 0-10-3-13-8L8 40c-2-3 0-6 3-6 2 0 4 1 6 3l4 5z" fill="#ffe0c8" stroke="#d99a82" stroke-width="2.2" stroke-linejoin="round"/><path d="M40 38v10M47 40v8" stroke="#e4b29b" stroke-width="2" stroke-linecap="round"/></svg>';
+  playroom.appendChild(finger);
+  let hintTimer = null;
+  let hintAnim = null;
+  function cancelFingerHint() {
+    window.clearTimeout(hintTimer);
+    hintTimer = null;
+    if (hintAnim) { hintAnim.cancel(); hintAnim = null; }
+    finger.style.visibility = 'hidden';
+  }
+  ['pointerdown', 'keydown'].forEach((type) => playroom.addEventListener(type, cancelFingerHint, true));
+  // Browsers only allow audio after a first touch anywhere on the page, so the landing theme tries
+  // to start on load and is unlocked by the first tap, click or key press.
+  ['pointerdown', 'touchstart', 'click', 'keydown'].forEach((type) => document.addEventListener(type, () => {
+    if (!soundOn) return;
+    if (!screens.home.classList.contains('hidden')) startMusic('home');
+    if (audioContext && audioContext.state === 'suspended') audioContext.resume();
+  }, true));
+  window.addEventListener('load', () => { if (!screens.home.classList.contains('hidden')) startMusic('home'); });
+
+  function stagePoint(clientX, clientY) {
+    const box = playroom.getBoundingClientRect();
+    const s = stageScale();
+    return { x: (clientX - box.left) / s, y: (clientY - box.top) / s };
+  }
+  function elementCenter(el) {
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return stagePoint(r.left + r.width / 2, r.top + r.height / 2);
+  }
+  function clockPoint(svg, angle, radius) {
+    const p = svg.createSVGPoint();
+    p.x = center.x + Math.sin(angle * Math.PI / 180) * radius;
+    p.y = center.y - Math.cos(angle * Math.PI / 180) * radius;
+    const c = p.matrixTransform(svg.getScreenCTM());
+    return stagePoint(c.x, c.y);
+  }
+  function hintPath() {
+    if (!screens.challenge.classList.contains('hidden')) {
+      const svg = $('clock-face');
+      const end = target.minute < 5 || target.minute > 55 ? 180 : target.minute * 6;
+      const path = [];
+      for (let i = 0; i <= 10; i++) path.push(clockPoint(svg, end * i / 10, 80));
+      return path;
+    }
+    let from, to;
+    if (!screens.read.classList.contains('hidden')) {
+      from = document.querySelector(`.number-card[data-kind="hour"][data-value="${readTarget.hour}"]`);
+      to = $('hour-slot');
+    } else {
+      const kind = wordTarget.minute === null ? 'hour' : 'minute';
+      from = document.querySelector(`.word-card[data-kind="${kind}"][data-value="${wordTarget[kind]}"]`);
+      to = $('word-phrase').querySelector(`.word-slot[data-kind="${kind}"]`);
+    }
+    const a = elementCenter(from), b = elementCenter(to);
+    return a && b ? [a, b] : null;
+  }
+  function playFingerHint() {
+    hintTimer = null;
+    const path = hintPath();
+    if (!path) return;
+    const at = (p, scale, opacity, offset) => ({ transform: `translate(${p.x - 22}px, ${p.y - 4}px) scale(${scale})`, opacity, offset });
+    const first = path[0], last = path[path.length - 1];
+    const frames = [at(first, 1, 0, 0), at(first, 1, 1, .15), at(first, .86, 1, .25)];
+    path.forEach((p, i) => frames.push(at(p, .86, 1, .25 + .5 * i / (path.length - 1))));
+    frames.push(at(last, 1, 1, .85), at(last, 1, 0, 1));
+    finger.style.visibility = 'visible';
+    hintAnim = finger.animate(frames, { duration: 3400, iterations: Infinity, easing: 'ease-in-out' });
   }
   function randTarget() {
     const hour = 1 + Math.floor(Math.random() * 12);
@@ -146,7 +229,7 @@
     return true;
   }
   function tone(frequency, duration = .16, type = 'sine', volume = .055, delay = 0) {
-    if (!soundOn || !audioReady()) return;
+    if (!soundOn || !audioReady() || audioContext.state !== 'running') return;
     const start = audioContext.currentTime + delay;
     const oscillator = audioContext.createOscillator();
     const gain = audioContext.createGain();
@@ -159,14 +242,58 @@
     oscillator.start(start);
     oscillator.stop(start + duration + .02);
   }
-  function startMusic() {
+  function startMusic(kind = 'game') {
+    if (musicTimer && musicKind !== kind) stopMusic();
     if (!soundOn || musicTimer || !audioReady()) return;
-    const notes = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 783.99, 698.46];
+    musicKind = kind;
+    musicStep = 0;
+    if (kind === 'home') return startHomeMusic();
+    // Same gentle C-major feel as before, but the melody is a random walk
+    // over a pentatonic scale that leans on the current chord's notes.
+    const scale = [523.25, 587.33, 659.25, 783.99, 880, 1046.5]; // C D E G A C
+    const bars = [
+      { root: 130.81, chord: [0, 2, 3] }, // C
+      { root: 110, chord: [1, 2, 4] },    // Am-ish
+      { root: 87.31, chord: [0, 4, 5] },  // F
+      { root: 98, chord: [1, 3, 5] }      // G-ish
+    ];
+    let pos = 2;
     musicTimer = window.setInterval(() => {
-      tone(notes[musicStep % notes.length], .42, 'sine', .018);
-      if (musicStep % 2 === 0) tone(notes[(musicStep + 2) % notes.length] / 2, .55, 'triangle', .012);
+      const beat = musicStep % 8;
+      const bar = bars[Math.floor(musicStep / 8) % bars.length];
+      if (beat % 2 === 0) tone(bar.root * (beat === 4 ? 1.5 : 1), .55, 'triangle', .012);
+      if (Math.random() > .18) {
+        if (beat === 0 || Math.random() < .3) pos = bar.chord[Math.floor(Math.random() * bar.chord.length)];
+        else pos = Math.max(0, Math.min(scale.length - 1, pos + [-1, -1, 0, 1, 1, 2][Math.floor(Math.random() * 6)]));
+        tone(scale[pos], .42, 'sine', .018);
+      }
       musicStep += 1;
     }, 560);
+  }
+  // Landing page theme: a bouncy music-box waltz in G major (3 beats a bar), random arpeggios and sparkles.
+  function startHomeMusic() {
+    const G = 98, A = 110, B = 123.47, C = 130.81, D = 146.83, E = 164.81;
+    const bars = [
+      { bass: G, notes: [392, 493.88, 587.33, 783.99] },      // G
+      { bass: E, notes: [329.63, 392, 493.88, 659.25] },      // Em
+      { bass: C, notes: [392, 523.25, 659.25, 783.99] },      // C
+      { bass: D, notes: [440, 587.33, 739.99, 880] }          // D
+    ];
+    let prev = 2;
+    musicTimer = window.setInterval(() => {
+      const beat = musicStep % 3;
+      const bar = bars[Math.floor(musicStep / 3) % bars.length];
+      if (beat === 0) tone(bar.bass * 2, .5, 'triangle', .02);
+      else if (Math.random() < .8) {
+        let next = Math.floor(Math.random() * bar.notes.length);
+        if (next === prev) next = (next + 1) % bar.notes.length;
+        prev = next;
+        tone(bar.notes[next], .3, 'triangle', .016);
+        if (Math.random() < .25) tone(bar.notes[next] * 2, .18, 'sine', .008, .19);
+      }
+      if (musicStep % 12 === 11) tone(bar.notes[3] * 2, .5, 'sine', .01, .05);
+      musicStep += 1;
+    }, 300);
   }
   function stopMusic() {
     if (musicTimer) window.clearInterval(musicTimer);
@@ -217,6 +344,7 @@
     shown = { hour: 0, minute: 0 };
     drawHands();
     startedAt = performance.now();
+    mistakes = 0;
     $('clock-hint').classList.remove('quiet');
     $('clock-hint').innerHTML = '<span>☝</span> Give the hands a little spin!';
     $('clock-face').classList.remove('help-on');
@@ -250,6 +378,7 @@
     $('read-hour-hand').setAttribute('transform', `rotate(${(hour % 12) * 30 + minute * .5} 160 160)`);
     $('read-minute-hand').setAttribute('transform', `rotate(${minute * 6} 160 160)`);
     startedAt = performance.now();
+    mistakes = 0;
     show('read');
     startMusic();
   }
@@ -299,6 +428,7 @@
     $('read-hour-hand').setAttribute('transform', `rotate(${(hour % 12) * 30 + minute * .5} 160 160)`);
     $('read-minute-hand').setAttribute('transform', `rotate(${minute * 6} 160 160)`);
     startedAt = performance.now();
+    mistakes = 0;
     show('word');
     startMusic();
   }
@@ -333,6 +463,19 @@
       ? 'Find the hour for an o’clock time! <span>✦</span>'
       : 'Find the minutes, then the hour! <span>✦</span>';
   }
+  function stageScale() {
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--s')) || 1;
+  }
+  function fitStage() {
+    const vv = window.visualViewport;
+    const w = vv ? vv.width : window.innerWidth;
+    const h = vv ? vv.height : window.innerHeight;
+    document.documentElement.style.setProperty('--s', Math.min(w / 600, h / 800));
+  }
+  fitStage();
+  window.addEventListener('resize', fitStage);
+  window.visualViewport?.addEventListener('resize', fitStage);
+
   function beginCardDrag(evt) {
     if (evt.button !== undefined && evt.button !== 0) return;
     evt.preventDefault();
@@ -342,8 +485,9 @@
     card.classList.add('drag-source');
     cardGhost = card.cloneNode(true);
     cardGhost.classList.add('drag-ghost');
-    cardGhost.style.width = `${rect.width}px`;
-    cardGhost.style.height = `${rect.height}px`;
+    const sc = stageScale();
+    cardGhost.style.width = `${rect.width / sc}px`;
+    cardGhost.style.height = `${rect.height / sc}px`;
     document.body.appendChild(cardGhost);
     moveGhost(evt.clientX, evt.clientY);
     card.setPointerCapture?.(evt.pointerId);
@@ -388,9 +532,17 @@
     const seconds = Math.max(1, Math.floor((performance.now() - startedAt) / 1000));
     $('elapsed-time').textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
     $('feedback-time').textContent = time;
-    stars += 1;
+    // Accuracy: first try = 2 points, one slip = 1. Speed: within the par time = 1 point. Always at least one star.
+    const accuracy = mistakes === 0 ? 2 : mistakes === 1 ? 1 : 0;
+    const quick = seconds <= parSeconds[challengeMode];
+    const earned = Math.max(1, accuracy + (quick ? 1 : 0));
+    stars += earned;
+    recordResult(earned, seconds, challengeMode);
     $('stars').textContent = String(stars);
-    $('reward-stars').textContent = seconds < 20 ? '⭐ ⭐ ⭐' : seconds < 45 ? '⭐ ⭐' : '⭐';
+    $('reward-stars').textContent = Array(earned).fill('⭐').join(' ');
+    $('elapsed-time').nextElementSibling.textContent = earned === 3 ? 'PERFECT AND SPEEDY!'
+      : mistakes === 0 ? 'SPOT ON! A LITTLE FASTER FOR 3 ⭐'
+      : quick ? 'FAST! TRY TO GET IT FIRST TIME' : 'GOOD TRY! KEEP PRACTISING';
     show('feedback');
     tone(659.25, .22, 'sine', .07);
     tone(783.99, .28, 'sine', .07, .13);
@@ -465,10 +617,10 @@
   $('start-challenge3').addEventListener('click', startWordChallenge);
   $('start-challenge4').addEventListener('click', startDigitalWordChallenge);
   $('start-remix').addEventListener('click', startRemixChallenge);
-  $('back-home').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); stopMusic(); });
-  $('back-home-2').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); stopMusic(); });
-  $('back-home-3').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); stopMusic(); });
-  $('feedback-home').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); stopMusic(); });
+  $('back-home').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); });
+  $('back-home-2').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); });
+  $('back-home-3').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); });
+  $('feedback-home').addEventListener('click', () => { show('home'); remixActive = false; $('help-toggle').classList.add('hidden'); });
   $('next-question').addEventListener('click', () => {
     round += 1;
     if (remixActive) startRemixRound();
@@ -491,6 +643,7 @@
     if (!matches) {
       $('encourage').innerHTML = 'Almost there! Give the hands another try <span>♥</span>';
       $('encourage').classList.add('incorrect');
+      mistakes += 1;
       tone(220, .22, 'triangle', .07);
       $('check-time').classList.remove('shake');
       void $('check-time').offsetWidth;
@@ -507,6 +660,7 @@
       return;
     }
     if (readAnswers.hour !== readTarget.hour || readAnswers.minute !== readTarget.minute) {
+      mistakes += 1;
       $('read-encourage').textContent = 'Almost there! Check the hour and minutes.';
       $('read-encourage').classList.add('incorrect');
       $('check-read-time').classList.remove('shake');
@@ -527,6 +681,7 @@
     }
     const matches = wordAnswers.hour === wordTarget.hour && wordAnswers.minute === wordTarget.minute;
     if (!matches) {
+      mistakes += 1;
       $('word-encourage').textContent = 'Almost there! Check the minutes and hour.';
       $('word-encourage').classList.add('incorrect');
       $('check-word-time').classList.remove('shake');
@@ -537,12 +692,148 @@
     }
     showRoundFeedback(formatTime(wordTarget.displayHour % 12, wordTarget.displayMinute));
   });
+  // ---- Local-only players and leaderboard: everything lives in this browser's localStorage and is never sent anywhere. ----
+  const STORE_KEY = 'clockclub.players.v1';
+  const colorOptions = [['Red', '#ff8a8a'], ['Orange', '#ffb15e'], ['Yellow', '#ffd95e'], ['Green', '#8fd3a4'], ['Blue', '#8cc4f2'], ['Purple', '#b99be0'], ['Pink', '#ffa9cf']];
+  const animalOptions = [['Panda', '🐼'], ['Fox', '🦊'], ['Bunny', '🐰'], ['Cat', '🐱'], ['Frog', '🐸'], ['Owl', '🦉'], ['Lion', '🦁'], ['Penguin', '🐧']];
+  const MAX_PLAYERS = 8;
+  let store = { active: null, players: [] };
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY));
+    if (saved && Array.isArray(saved.players)) store = saved;
+  } catch (e) { /* storage unavailable: scores last for this visit only */ }
+  function saveStore() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) { /* ignore */ }
+  }
+  function activePlayer() {
+    return store.players.find((p) => p.id === store.active) || null;
+  }
+  function makePlayer(color, animal) {
+    const [colorName] = colorOptions[color];
+    const [animalName, emoji] = animalOptions[animal];
+    let name = `${colorName} ${animalName}`, n = 2;
+    while (store.players.some((p) => p.name === name)) name = `${colorName} ${animalName} ${n++}`;
+    const player = { id: `p${Date.now().toString(36)}${Math.floor(Math.random() * 1e4)}`, name, emoji, color: colorOptions[color][1], stars: 0, rounds: 0, perfect: 0, best: {} };
+    store.players.push(player);
+    store.active = player.id;
+    saveStore();
+    return player;
+  }
+  function recordResult(earned, seconds, mode) {
+    let player = activePlayer();
+    if (!player) {
+      if (store.players.length >= MAX_PLAYERS) return;
+      player = makePlayer(Math.floor(Math.random() * colorOptions.length), Math.floor(Math.random() * animalOptions.length));
+    }
+    player.stars += earned;
+    player.rounds += 1;
+    if (earned === 3) player.perfect += 1;
+    if (!player.best[mode] || seconds < player.best[mode]) player.best[mode] = seconds;
+    saveStore();
+  }
+  const modals = { parents: $('parents-modal'), board: $('board-modal') };
+  function openModal(name) {
+    cancelFingerHint();
+    Object.values(modals).forEach((m) => m.classList.add('hidden'));
+    modals[name].classList.remove('hidden');
+    if (name === 'board') renderBoard();
+  }
+  function closeModals() {
+    Object.values(modals).forEach((m) => m.classList.add('hidden'));
+  }
+  Object.values(modals).forEach((m) => {
+    m.addEventListener('click', (evt) => { if (evt.target === m || evt.target.closest('[data-close]')) closeModals(); });
+  });
+  document.addEventListener('keydown', (evt) => { if (evt.key === 'Escape') closeModals(); });
+  $('open-parents').addEventListener('click', () => openModal('parents'));
+  $('open-board').addEventListener('click', () => openModal('board'));
+
+  let pickColor = Math.floor(Math.random() * colorOptions.length);
+  let pickAnimal = Math.floor(Math.random() * animalOptions.length);
+  function renderPicker() {
+    const colors = $('color-chips'), animals = $('animal-chips');
+    colors.innerHTML = '';
+    animals.innerHTML = '';
+    colorOptions.forEach(([name, hex], i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `chip color-chip${i === pickColor ? ' selected' : ''}`;
+      b.style.background = hex;
+      b.setAttribute('aria-label', name);
+      b.addEventListener('click', () => { pickColor = i; renderPicker(); });
+      colors.appendChild(b);
+    });
+    animalOptions.forEach(([name, emoji], i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `chip${i === pickAnimal ? ' selected' : ''}`;
+      b.textContent = emoji;
+      b.setAttribute('aria-label', name);
+      b.addEventListener('click', () => { pickAnimal = i; renderPicker(); });
+      animals.appendChild(b);
+    });
+    $('add-preview').textContent = `${colorOptions[pickColor][0]} ${animalOptions[pickAnimal][0]}`;
+    $('add-player').disabled = store.players.length >= MAX_PLAYERS;
+  }
+  let confirmClear = false;
+  function renderBoard() {
+    const list = $('board-list');
+    list.innerHTML = '';
+    const ranked = [...store.players].sort((x, y) => y.stars - x.stars || y.perfect - x.perfect);
+    if (!ranked.length) {
+      list.innerHTML = '<li class="board-empty">No players yet. Play a round, or add a player below!</li>';
+    }
+    const medals = ['🥇', '🥈', '🥉'];
+    ranked.forEach((p, i) => {
+      const li = document.createElement('li');
+      const row = document.createElement('div');
+      row.className = `board-row${p.id === store.active ? ' active' : ''}`;
+      row.setAttribute('role', 'button');
+      row.tabIndex = 0;
+      const fastest = Object.values(p.best).length ? Math.min(...Object.values(p.best)) : null;
+      row.innerHTML = `<span class="board-rank">${medals[i] || i + 1}</span><span class="board-avatar">${p.emoji}</span>`
+        + `<span class="board-name"><span></span><small>${p.rounds} rounds · ${p.perfect} perfect${fastest ? ` · fastest ${fastest}s` : ''}</small></span>`
+        + `<span class="board-stars">⭐ ${p.stars}</span><button type="button" class="board-del" aria-label="Remove player">🗑</button>`;
+      row.querySelector('.board-name > span').textContent = p.name;
+      row.style.borderLeft = `8px solid ${p.color}`;
+      const select = () => { store.active = p.id; saveStore(); renderBoard(); };
+      row.addEventListener('click', select);
+      row.addEventListener('keydown', (evt) => { if (evt.key === 'Enter' || evt.key === ' ') { evt.preventDefault(); select(); } });
+      row.querySelector('.board-del').addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        const btn = evt.currentTarget;
+        if (btn.dataset.sure !== '1') { btn.dataset.sure = '1'; btn.textContent = 'Sure?'; return; }
+        store.players = store.players.filter((x) => x.id !== p.id);
+        if (store.active === p.id) store.active = store.players[0]?.id || null;
+        saveStore();
+        renderBoard();
+      });
+      li.appendChild(row);
+      list.appendChild(li);
+    });
+    renderPicker();
+    $('clear-board').textContent = confirmClear ? 'Tap again to erase everyone' : 'Erase all saved players';
+  }
+  $('add-player').addEventListener('click', () => {
+    if (store.players.length >= MAX_PLAYERS) return;
+    makePlayer(pickColor, pickAnimal);
+    renderBoard();
+  });
+  $('clear-board').addEventListener('click', () => {
+    if (!confirmClear) { confirmClear = true; renderBoard(); return; }
+    confirmClear = false;
+    store = { active: null, players: [] };
+    saveStore();
+    renderBoard();
+  });
+
   $('sound-button').addEventListener('click', (evt) => {
     soundOn = !soundOn;
     evt.currentTarget.classList.toggle('sound-off', !soundOn);
     evt.currentTarget.setAttribute('aria-label', soundOn ? 'Turn sound off' : 'Turn sound on');
     evt.currentTarget.setAttribute('aria-pressed', String(soundOn));
     if (soundOn && (!screens.challenge.classList.contains('hidden') || !screens.read.classList.contains('hidden') || !screens.word.classList.contains('hidden'))) startMusic();
+    else if (soundOn && !screens.home.classList.contains('hidden')) startMusic('home');
     else stopMusic();
   });
   const idleGazes = [{ x: -2, y: -1 }, { x: 2, y: -2 }, { x: 1, y: 2 }, { x: -1, y: 1 }, { x: 0, y: 0 }];
